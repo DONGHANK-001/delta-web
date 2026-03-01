@@ -1,140 +1,83 @@
-import { motion } from 'motion/react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar } from 'recharts';
+import { Mail, Phone, MapPin, Linkedin, Twitter, Youtube } from 'lucide-react';
 
-const energyData = [
-  { year: '2018', savings: 210 },
-  { year: '2019', savings: 245 },
-  { year: '2020', savings: 280 },
-  { year: '2021', savings: 320 },
-  { year: '2022', savings: 358 },
-];
-
-const renewableData = [
-  { name: '再生能源', value: 63 },
-  { name: '傳統能源', value: 37 },
-];
-
-const carbonData = [
-  { year: '2020', reduction: 5 },
-  { year: '2021', reduction: 9 },
-  { year: '2022', reduction: 13.5 },
-];
-
-const COLORS = ['#78BE20', '#E5E7EB'];
-
-export default function ESGStats() {
+export default function Footer() {
   return (
-    <section id="esg" className="py-24 bg-slate-50">
+    <footer className="bg-[#1A1A1A] text-white py-20">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-display font-bold mb-6"
-          >
-            ESG 永續發展成果
-          </motion.h2>
-          <p className="text-gray-500 max-w-2xl mx-auto">
-            數據見證我們對地球的承諾。透過創新技術，我們持續降低環境衝擊。
-          </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          {/* Brand */}
+          <div>
+            <div className="flex items-center gap-2 mb-6">
+              <div className="w-8 h-8 bg-delta-blue rounded-sm flex items-center justify-center text-white font-bold text-xl">D</div>
+              <span className="font-display font-bold text-xl tracking-tight">DELTA</span>
+            </div>
+            <p className="text-gray-400 text-sm leading-relaxed mb-8">
+              台達電子致力於提供創新、潔淨與節能的解決方案。我們透過領先的電源技術與自動化系統，為全球客戶創造永續價值。
+            </p>
+            <div className="flex gap-4">
+              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-delta-blue transition-colors">
+                <Linkedin className="w-5 h-5" />
+              </a>
+              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-delta-blue transition-colors">
+                <Twitter className="w-5 h-5" />
+              </a>
+              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-delta-blue transition-colors">
+                <Youtube className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h4 className="font-bold mb-6 text-lg">快速連結</h4>
+            <ul className="space-y-4 text-gray-400 text-sm">
+              <li><a href="#hero" className="hover:text-white transition-colors">首頁</a></li>
+              <li><a href="#business" className="hover:text-white transition-colors">事業群</a></li>
+              <li><a href="#esg" className="hover:text-white transition-colors">永續發展</a></li>
+              <li><a href="#milestones" className="hover:text-white transition-colors">發展里程碑</a></li>
+            </ul>
+          </div>
+
+          {/* Business Groups */}
+          <div>
+            <h4 className="font-bold mb-6 text-lg">核心事業</h4>
+            <ul className="space-y-4 text-gray-400 text-sm">
+              <li><a href="#" className="hover:text-white transition-colors">電源及零組件</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">自動化解決方案</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">基礎設施建設</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">智慧能源管理</a></li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="font-bold mb-6 text-lg">聯絡我們</h4>
+            <ul className="space-y-4 text-gray-400 text-sm">
+              <li className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-delta-blue shrink-0" />
+                <span>台北市內湖區瑞光路 186 號</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-delta-blue shrink-0" />
+                <span>+886-2-8797-2088</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Mail className="w-5 h-5 text-delta-blue shrink-0" />
+                <span>info@deltaww.com</span>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Chart 1: Energy Savings */}
-          <div 
-            data-aos="zoom-in"
-            data-aos-delay="0"
-            className="stats-card"
-          >
-            <h3 className="text-lg font-bold mb-2">累計節電量 (億度)</h3>
-            <p className="text-sm text-gray-500 mb-8">2009-2022 累計成果</p>
-            <div className="h-64 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={energyData}>
-                  <defs>
-                    <linearGradient id="colorSavings" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#005596" stopOpacity={0.1}/>
-                      <stop offset="95%" stopColor="#005596" stopOpacity={0}/>
-                    </linearGradient>
-                  </defs>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F3F4F6" />
-                  <XAxis dataKey="year" axisLine={false} tickLine={false} tick={{fontSize: 12}} />
-                  <YAxis hide />
-                  <Tooltip />
-                  <Area type="monotone" dataKey="savings" stroke="#005596" strokeWidth={3} fillOpacity={1} fill="url(#colorSavings)" />
-                </AreaChart>
-              </ResponsiveContainer>
-            </div>
-            <div className="mt-6 text-center">
-              <span className="text-4xl font-display font-bold text-delta-blue">358</span>
-              <span className="text-gray-500 ml-2">億度</span>
-            </div>
-          </div>
-
-          {/* Chart 2: Renewable Energy */}
-          <div 
-            data-aos="zoom-in"
-            data-aos-delay="100"
-            className="stats-card relative"
-          >
-            <h3 className="text-lg font-bold mb-2">再生能源使用比例</h3>
-            <p className="text-sm text-gray-500 mb-8">邁向 RE100 目標</p>
-            <div className="h-64 w-full flex items-center justify-center">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={renewableData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={80}
-                    paddingAngle={5}
-                    dataKey="value"
-                  >
-                    {renewableData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                </PieChart>
-              </ResponsiveContainer>
-              <div className="absolute flex flex-col items-center">
-                <span className="text-3xl font-display font-bold text-delta-green">63%</span>
-                <span className="text-[10px] text-gray-400 uppercase tracking-widest">Renewable</span>
-              </div>
-            </div>
-            <p className="mt-6 text-center text-sm text-gray-600">
-              承諾 2030 年達成 100% 再生能源使用
-            </p>
-          </div>
-
-          {/* Chart 3: Carbon Reduction */}
-          <div 
-            data-aos="zoom-in"
-            data-aos-delay="200"
-            className="stats-card"
-          >
-            <h3 className="text-lg font-bold mb-2">碳排放強度降低</h3>
-            <p className="text-sm text-gray-500 mb-8">年度減碳成果 (%)</p>
-            <div className="h-64 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={carbonData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F3F4F6" />
-                  <XAxis dataKey="year" axisLine={false} tickLine={false} tick={{fontSize: 12}} />
-                  <YAxis hide />
-                  <Tooltip cursor={{fill: '#F9FAFB'}} />
-                  <Bar dataKey="reduction" fill="#78BE20" radius={[4, 4, 0, 0]} barSize={40} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-            <div className="mt-6 text-center">
-              <span className="text-4xl font-display font-bold text-delta-green">13.5</span>
-              <span className="text-gray-500 ml-2">%</span>
-            </div>
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+          <p>© 2024 Delta Electronics, Inc. All Rights Reserved.</p>
+          <div className="flex gap-6">
+            <a href="#" className="hover:text-white transition-colors">隱私權政策</a>
+            <a href="#" className="hover:text-white transition-colors">使用條款</a>
+            <a href="#" className="hover:text-white transition-colors">Cookie 設定</a>
           </div>
         </div>
       </div>
-    </section>
+    </footer>
   );
 }

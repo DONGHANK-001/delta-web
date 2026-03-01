@@ -1,59 +1,92 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Menu, X } from 'lucide-react';
+import { Zap, Cpu, Building2, CheckCircle2 } from 'lucide-react';
 
-export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+const groups = [
+  {
+    id: 'power',
+    title: '電源及零組件',
+    icon: Zap,
+    description: '全球電源管理領導者，提供高效率電力轉換與熱管理解決方案。',
+    features: ['高效率電源轉換', '先進散熱技術', '關鍵零組件整合'],
+    color: 'bg-blue-50 text-delta-blue',
+    image: 'https://picsum.photos/seed/delta-power/600/400'
+  },
+  {
+    id: 'automation',
+    title: '自動化',
+    icon: Cpu,
+    description: '驅動智慧製造，透過工業自動化提升生產力與能源效率。',
+    features: ['智慧工廠解決方案', '機器人與運動控制', '工業能源管理'],
+    color: 'bg-green-50 text-delta-green',
+    image: 'https://picsum.photos/seed/delta-auto/600/400'
+  },
+  {
+    id: 'infrastructure',
+    title: '基礎設施',
+    icon: Building2,
+    description: '建構智慧城市與資料中心，優化關鍵基礎設施的運作效率。',
+    features: ['資料中心基礎設施', '電動車充電解決方案', '智慧樓宇自動化'],
+    color: 'bg-slate-50 text-slate-700',
+    image: 'https://picsum.photos/seed/delta-infra/600/400'
+  }
+];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
+export default function BusinessGroups() {
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'glass-nav py-4' : 'bg-transparent py-6'}`}>
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-delta-blue rounded-sm flex items-center justify-center text-white font-bold text-xl">D</div>
-          <span className={`font-display font-bold text-xl tracking-tight ${isScrolled ? 'text-delta-blue' : 'text-white'}`}>
-            DELTA
-          </span>
+    <section id="business" className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-5xl font-display font-bold mb-6"
+          >
+            三大核心事業群
+          </motion.h2>
+          <div className="w-20 h-1 bg-delta-blue mx-auto mb-6" />
+          <p className="text-gray-500 max-w-2xl mx-auto">
+            我們將技術實力轉化為多元化的解決方案，滿足全球市場對節能與效率的嚴苛需求。
+          </p>
         </div>
 
-        {/* Desktop Menu */}
-        <div className={`hidden md:flex items-center gap-8 font-medium text-sm uppercase tracking-wider ${isScrolled ? 'text-gray-600' : 'text-white/90'}`}>
-          <a href="#hero" className="hover:text-delta-blue transition-colors">首頁</a>
-          <a href="#business" className="hover:text-delta-blue transition-colors">事業群</a>
-          <a href="#esg" className="hover:text-delta-blue transition-colors">永續發展</a>
-          <a href="#milestones" className="hover:text-delta-blue transition-colors">里程碑</a>
-          <button className="bg-delta-blue text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20">
-            聯絡我們
-          </button>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {groups.map((group, index) => (
+            <div
+              key={group.id}
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+              className="group flex flex-col bg-white rounded-3xl overflow-hidden border border-gray-100 card-hover-scale"
+            >
+              <div className="h-48 overflow-hidden">
+                <img 
+                  src={group.image} 
+                  alt={group.title} 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              <div className="p-8 flex-1 flex flex-col">
+                <div className={`w-12 h-12 rounded-2xl ${group.color} flex items-center justify-center mb-6 transition-transform group-hover:rotate-12`}>
+                  <group.icon className="w-6 h-6" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4 group-hover:text-delta-blue transition-colors">{group.title}</h3>
+                <p className="text-gray-600 mb-8 leading-relaxed">
+                  {group.description}
+                </p>
+                <div className="mt-auto space-y-3">
+                  {group.features.map((feature) => (
+                    <div key={feature} className="flex items-center gap-3 text-sm font-medium text-gray-700">
+                      <CheckCircle2 className="w-4 h-4 text-delta-green" />
+                      {feature}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-
-        {/* Mobile Toggle */}
-        <button className="md:hidden text-white" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-          {isMobileMenuOpen ? <X className={isScrolled ? 'text-delta-blue' : 'text-white'} /> : <Menu className={isScrolled ? 'text-delta-blue' : 'text-white'} />}
-        </button>
       </div>
-
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="absolute top-full left-0 w-full bg-white shadow-xl p-6 flex flex-col gap-4 md:hidden"
-        >
-          <a href="#hero" onClick={() => setIsMobileMenuOpen(false)} className="text-gray-800 font-medium">首頁</a>
-          <a href="#business" onClick={() => setIsMobileMenuOpen(false)} className="text-gray-800 font-medium">事業群</a>
-          <a href="#esg" onClick={() => setIsMobileMenuOpen(false)} className="text-gray-800 font-medium">永續發展</a>
-          <a href="#milestones" onClick={() => setIsMobileMenuOpen(false)} className="text-gray-800 font-medium">里程碑</a>
-        </motion.div>
-      )}
-    </nav>
+    </section>
   );
 }

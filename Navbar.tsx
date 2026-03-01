@@ -1,26 +1,39 @@
-name: Deploy to GitHub Pages
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+@import "aos/dist/aos.css";
 
-on:
-  push:
-    branches: [main] # 當您推送到 main 分支時觸發
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --color-delta-blue: #005596;
+  --color-delta-green: #78BE20;
+}
 
-permissions:
-  contents: write # 允許 Actions 寫入 gh-pages 分支
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-[#F8F9FA] text-[#1A1A1A] antialiased overflow-x-hidden;
+  }
+}
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout 📥
-        uses: actions/checkout@v4
+.glass-nav {
+  @apply backdrop-blur-xl bg-white/70 border-b border-white/20 shadow-sm;
+}
 
-      - name: Install and Build 🏗️
-        run: |
-          npm install
-          npm run build
+.card-hover-scale {
+  @apply transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:z-10;
+}
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: dist # Vite 編譯後的資料夾名稱
-          branch: gh-pages # 部署到的分支
+.stats-card {
+  @apply bg-white p-8 rounded-3xl border border-gray-100 shadow-lg hover:shadow-xl transition-shadow duration-300;
+}
+
+/* Custom AOS tweaks if needed */
+[data-aos] {
+  pointer-events: none;
+}
+.aos-animate {
+  pointer-events: auto;
+}
