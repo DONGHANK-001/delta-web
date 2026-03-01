@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary Meta Tags -->
+    <title>台達電 Delta Electronics | 節能、自動化、基礎設施領導品牌</title>
+    <meta name="title" content="台達電 Delta Electronics | 節能、自動化、基礎設施領導品牌">
+    <meta name="description" content="台達電 (Delta Electronics) 致力於提供創新、潔淨與節能的解決方案。專注於電源管理、工業自動化、基礎設施與 ESG 永續發展，共創綠色未來。">
+    <meta name="keywords" content="台達電, Delta Electronics, 綠能解決方案, ESG 永續, 自動化領導品牌, 智慧製造, 節能技術">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.deltaww.com/">
+    <meta property="og:title" content="台達電 Delta Electronics | Smarter. Greener. Together.">
+    <meta property="og:description" content="探索台達電在智慧能源與自動化領域的領先技術，實踐 ESG 永續承諾。">
+    <meta property="og:image" content="https://www.deltaww.com/UserFiles/Delta_Logo.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.deltaww.com/">
+    <meta property="twitter:title" content="台達電 Delta Electronics | Smarter. Greener. Together.">
+    <meta property="twitter:description" content="探索台達電在智慧能源與自動化領域的領先技術，實踐 ESG 永續承諾。">
+    <meta property="twitter:image" content="https://www.deltaww.com/UserFiles/Delta_Logo.png">
+
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
